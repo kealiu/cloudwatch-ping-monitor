@@ -5,6 +5,7 @@
 #NAMESPACE=DXPingMonitor
 #METRICNAME=OK
 #TIMEOUTSEC=0.005
+#INTERVAL=1
 
 # for use watch, export all these values as envvar
 SSHPMSTORE=PingMintorConfig
@@ -32,5 +33,5 @@ export -f cloudwatchOneIPping
 
 for targetip in $(echo $TARGETIPS | sed 's/,/ /g')
 do
-    nohup watch -n 1 -x bash -c "cloudwatchOneIPping ${targetip}" 2>&1 > /dev/null & 
+    nohup watch -n ${INTERVAL} -x bash -c "cloudwatchOneIPping ${targetip}" 2>&1 > /dev/null & 
 done
